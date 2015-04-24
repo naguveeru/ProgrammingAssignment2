@@ -32,8 +32,13 @@ cacheSolve <- function(x, ...) {
             print('Inverse of this matrix exists, fetching from cache')
         return(x$getinv())
         }
+        data <- x$get()
+        if(is.na(x$get()[1,1])) {
+            print('Matrix not set. First set the matrix using x$set(<matrix>)')
+            return (NULL)
+        } 
         n<-tryCatch(
-                 solve(x$get())
+                 solve(data)
                  ,warning=function(x){'Error'}
                  ,error=function(x){'Error'}
                  ,finally={""}
